@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProxyDesignPattern.Components
 {
+    //Interface to represnt Service Call Operation.
     public interface IServiceCall
     {
          ServiceRequest Request
@@ -17,7 +18,7 @@ namespace ProxyDesignPattern.Components
         {
             get;
         }
-
+        //event which should triggered when the request complete.
         event OnRequestCompleteEventHandler OnRequestComplete;
 
     }

@@ -9,6 +9,7 @@ using ProxyDesignPattern.Proxy;
 
 namespace ProxyDesignPattern.Components
 {
+    //real service client
     public class ServiceCall : IServiceCall
     {
         public ServiceRequest Request
@@ -26,9 +27,12 @@ namespace ProxyDesignPattern.Components
 
         public event OnRequestCompleteEventHandler OnRequestComplete;
 
+        //this method simulate a time consuming service operation calling or any other time consuming operation.
         private ServiceResponse CallService(ServiceRequest request)
         {
+            //for consume some time...
             Thread.Sleep(5000);
+
             return new ServiceResponse() { AccountStatus = "Account is Activated." };
         }
     }

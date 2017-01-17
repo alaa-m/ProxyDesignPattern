@@ -23,26 +23,30 @@ namespace ProxyDesignPattern
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //declate service proxy.
             serviceProxy = new ServiceCallProxy();
-
+            //subscribe to on complete event to show the response.
             serviceProxy.OnRequestComplete += ServiceProxy_OnRequestComplete;
-
+            //initiate the request.
             serviceProxy.Request = new ServiceRequest() { UserName = "admin", Password = "1234" };
-
+            //show place holding response.
             resultLBL.Text = serviceProxy.Response.AccountStatus;
 
+            
             callServiceBTN.Enabled = false;
             refreshBTN.Enabled = true;
         }
 
         private void ServiceProxy_OnRequestComplete(object sender, EventArgs e)
         {
+            //access label from a different thread.
             if (this.resultLBL.InvokeRequired)
             {
                 this.resultLBL.BeginInvoke((MethodInvoker)delegate () { this.resultLBL.Text = serviceProxy.Response.AccountStatus; ; });
             }
             else
             {
+                //show real response.
                 this.resultLBL.Text = serviceProxy.Response.AccountStatus ;
             }
         }
